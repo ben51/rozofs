@@ -101,7 +101,7 @@ int rpcclt_initialize(rpcclt_t * client, const char *host, unsigned long prog,
     // If set, disable the Nagle algorithm. This means that segments are always
     // sent as soon as possible, even if there is only a small amount of data.
     if (setsockopt
-            (client->sock, SOL_TCP, TCP_NODELAY, (char *) &one,
+            (client->sock, IPPROTO_TCP, TCP_NODELAY, (char *) &one,
             sizeof (int)) < 0) {
         goto out;
     }
