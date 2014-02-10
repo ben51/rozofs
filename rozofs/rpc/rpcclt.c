@@ -20,6 +20,7 @@
 #include <netinet/tcp.h>
 #include <errno.h>
 #include <string.h>
+#include <rpc/rpc.h>
 #include <rpc/pmap_clnt.h>
 #include <unistd.h>
 
