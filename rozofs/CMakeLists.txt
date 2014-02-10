@@ -141,6 +141,7 @@ set (librozofs_sources
     core/com_tx_timer.c
     core/rozofs_ip_utilities.c
     core/rozofs_ip_utilities.h
+    core/rozofs_xdr_freebsd.c
     rozofs_timer_conf.h
     rozofs_timer_conf.c    
     core/rozofs_timer_conf_dbg.c

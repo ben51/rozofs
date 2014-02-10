@@ -170,4 +170,12 @@ static inline void mstor_get_slice_and_subslice(fid_t fid, uint32_t *slice, uint
     hash = hash >> MAX_SLICE_BIT;
     *subslice = hash & ((1 << MAX_SUBSLICE_BIT) - 1);
 }
+
+#ifdef __FreeBSD__
+#include <rpc/rpc.h>
+extern bool_t	xdr_int8_t(XDR *, int8_t *);
+extern bool_t	xdr_u_int8_t(XDR *, u_int8_t *);
+extern bool_t	xdr_uint8_t(XDR *, u_int8_t *);
+#endif
+
 #endif
