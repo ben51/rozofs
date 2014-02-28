@@ -20,6 +20,7 @@
 #define _STORAGE_H
 
 #include <stdint.h>
+#include <stdio.h>
 #include <limits.h>
 #include <uuid/uuid.h>
 #include <sys/param.h>

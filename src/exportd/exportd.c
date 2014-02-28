@@ -32,6 +32,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <rpc/rpc.h>
 #include <rpc/pmap_clnt.h>
 
 #include <rozofs/rozofs_debug_ports.h>

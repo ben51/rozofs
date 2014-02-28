@@ -23,6 +23,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <pthread.h>
+#include <string.h>
 
 #include <rozofs/common/log.h>
 #include <rozofs/common/xmalloc.h>

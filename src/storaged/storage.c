@@ -661,6 +661,7 @@ int storage_list_bins_files_to_rebuild(storage_t * st, sid_t sid,
     uint64_t current_files_nb = 0;
     bins_file_rebuild_t **iterator = NULL;
     uint8_t check_dist_set = 0;
+		struct stat sb;
 
     DEBUG_FUNCTION;
 

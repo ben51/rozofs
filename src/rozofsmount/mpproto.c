@@ -18,6 +18,7 @@
 
 #include <rozofs/common/log.h>
 #include <rozofs/common/profile.h>
+#include <string.h>
 
 DECLARE_PROFILING(mpp_profiler_t);
 

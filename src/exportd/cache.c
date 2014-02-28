@@ -23,6 +23,7 @@
 #include <uuid/uuid.h>
 #include <errno.h>
 #include <string.h>
+#include <stdio.h>
  
 #include <rozofs/common/xmalloc.h>
 #include <rozofs/rpc/epproto.h>

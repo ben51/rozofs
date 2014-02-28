@@ -18,6 +18,7 @@
 
 #include <limits.h>
 #include <errno.h>
+#include <string.h>
 
 #include <rozofs/common/log.h>
 #include <rozofs/common/xmalloc.h>
