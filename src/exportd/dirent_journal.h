@@ -248,7 +248,10 @@ static inline int dirent_journal_append_item(int root_idx, int dirfd,dirent_jour
 {
 
     int fd = -1;
-    int flag = O_WRONLY | O_NOATIME;
+    int flag = O_WRONLY;
+#ifdef __linux__
+		flag |= O_NOATIME;
+#endif
     char      pathname[64];
     char     *path_p;
     uint32_t appended_size;
@@ -366,7 +369,10 @@ static inline int dirent_journal_flush_disk(int root_idx, int dirfd,dirent_journ
 {
 
     int fd = -1;
-    int flag = O_WRONLY | O_NOATIME;
+    int flag = O_WRONLY;
+#ifdef __linux__
+		flag |= O_NOATIME;
+#endif
     char      pathname[64];
     char     *path_p;
 

@@ -16,7 +16,9 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
 
 #include <string.h>
 #include <stdio.h>
@@ -2319,7 +2321,10 @@ int fdl_debug_first_chunk_of_array_write = -1;
  */
 int write_mdirents_file(int dirfd, mdirents_cache_entry_t *dirent_cache_p) {
     int fd = -1;
-    int flag = O_WRONLY | O_CREAT | O_NOATIME;
+    int flag = O_WRONLY | O_CREAT;
+#ifdef __linux__
+		flag |= O_NOATIME;
+#endif
     char pathname[64];
     char *path_p;
     mdirents_file_t *dirent_file_p = NULL;

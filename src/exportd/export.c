@@ -16,7 +16,10 @@
   <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 700
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -27,7 +30,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <attr/xattr.h>
+
+#ifdef __FreeBSD__
+#include <sys/param.h>
+#include <sys/mount.h>
+#else
 #include <sys/vfs.h>
+#endif
+
 #include <uuid/uuid.h>
 #include <sys/types.h>
 #include <inttypes.h>

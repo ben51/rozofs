@@ -16,7 +16,10 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 700
+#endif
+
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -36,7 +39,11 @@ int mdir_open(mdir_t *mdir, const char *path) {
 
     START_PROFILING(mdir_open);
 
-    if ((mdir->fdp = open(path, O_RDONLY | O_NOATIME, S_IRWXU)) < 0) {
+    if ((mdir->fdp = open(path, O_RDONLY
+#ifdef __linux__
+				| O_NOATIME
+#endif
+				, S_IRWXU)) < 0) {
         goto out;
     }
 

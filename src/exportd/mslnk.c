@@ -16,7 +16,10 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
+
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -32,7 +35,11 @@
 
 int mslnk_open(mslnk_t *mslnk, const char *path) {
     START_PROFILING(mslnk_open);
-    mslnk->fdattrs = open(path, O_RDWR | O_NOATIME, S_IRWXU);
+    mslnk->fdattrs = open(path, O_RDWR
+#ifdef __linux__
+			| O_NOATIME
+#endif
+			, S_IRWXU);
     STOP_PROFILING(mslnk_open);
     return mslnk->fdattrs < 0 ? -1 : 0;
 }

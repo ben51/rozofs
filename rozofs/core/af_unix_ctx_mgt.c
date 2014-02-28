@@ -31,6 +31,10 @@
 #include "uma_dbg_api.h"
 #include "af_unix_socket_generic.h"
 
+#ifndef __linux__
+#include "tcp_states.h"
+#endif
+
 af_unix_ctx_generic_t *af_unix_context_freeListHead; /**< head of list of the free context  */
 af_unix_ctx_generic_t af_unix_context_activeListHead; /**< list of the active context     */
 

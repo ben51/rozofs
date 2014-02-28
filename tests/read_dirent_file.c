@@ -11,7 +11,11 @@
 #include <errno.h>
 #include <limits.h>
 #include <unistd.h>
+#ifdef __linux__
 #include <uuid/uuid.h>
+#else
+#include <uuid.h>
+#endif
 #include <stdlib.h>
 
 typedef uuid_t fid_t; /**< file id */

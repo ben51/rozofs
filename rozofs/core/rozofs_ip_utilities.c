@@ -19,7 +19,9 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
+#ifdef __linux__
 #include <linux/if.h>
+#endif
 #include <unistd.h>
 #include <ctype.h>
 #include <errno.h>
@@ -114,3 +116,4 @@ int is_this_ipV4_configured(uint32_t ipv4) {
   }
   return 0;
 }
+

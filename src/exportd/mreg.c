@@ -16,7 +16,10 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
+
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -32,7 +35,11 @@
 int mreg_open(mreg_t *mreg, const char *path) {
     START_PROFILING(mreg_open);
 
-    mreg->fdattrs = open(path, O_RDWR | O_NOATIME, S_IRWXU);
+    mreg->fdattrs = open(path, O_RDWR
+#ifdef __linux__
+				| O_NOATIME
+#endif
+				, S_IRWXU);
 
     STOP_PROFILING(mreg_open);
     return mreg->fdattrs < 0 ? -1 : 0;

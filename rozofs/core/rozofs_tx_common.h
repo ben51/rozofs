@@ -27,6 +27,11 @@
 #include "com_tx_timer_api.h"
 #include <errno.h>
 #include <rozofs/rozofs.h>
+
+#ifndef ETIME
+#define ETIME 62
+#endif
+
 /**
  *  Common packet header for the exchange between the blocks
  */

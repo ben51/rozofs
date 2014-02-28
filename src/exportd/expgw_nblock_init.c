@@ -17,20 +17,21 @@
  */
 
 /* need for crypt */
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
-
+#endif
 
 #include <stdlib.h>
-#include <sys/types.h> 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <netinet/in.h>
 #include <sys/un.h>
 #include <unistd.h>
-#include <fcntl.h> 
-#include <errno.h>  
-#include <stdarg.h>    
-#include <string.h>  
+#include <fcntl.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <string.h>
 #include <strings.h>
 #include <semaphore.h>
 #include <pthread.h>

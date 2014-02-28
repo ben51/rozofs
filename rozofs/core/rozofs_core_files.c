@@ -115,7 +115,9 @@ char * rozofs_signal(int sig) {
   case SIGPIPE   : return "SIGPIPE";  /* Write on a pipe with no reader, Broken pipe (POSIX) */
   case SIGALRM   : return "SIGALRM";  /* Alarm clock (POSIX)                                 */
   case SIGTERM   : return "SIGTERM";  /* Termination (ANSI)                                  */
+#ifdef __linux__
   case SIGSTKFLT : return "SIGSTKFLT";/* Stack fault                                         */
+#endif
   case SIGCHLD   : return "SIGCHLD";  /* Child process has stopped or exited, changed (POSIX)*/
   case SIGCONT   : return "SIGCONT";  /* Continue executing, if stopped (POSIX)              */
   case SIGSTOP   : return "SIGSTOP";  /* top executing(can't be caught or ignored) (POSIX)   */
@@ -129,7 +131,9 @@ char * rozofs_signal(int sig) {
   case SIGPROF   : return "SIGPROF";  /* Profiling alarm clock (4.2 BSD)                     */
   case SIGWINCH  : return "SIGWINCH"; /* Window size change (4.3 BSD, Sun)                   */
   case SIGIO     : return "SIGIO";    /* I/O now possible (4.2 BSD)                          */
+#ifdef __linux__
   case SIGPWR    : return "SIGPWR";   /* Power failure restart (System V)                    */
+#endif
   case SIGSYS    : return "SIGSYS";
   default        : return "?";      
   }

@@ -16,7 +16,9 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -27,7 +29,14 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#ifdef __FreeBSD__
+#include <sys/param.h>
+#include <sys/mount.h>
+#else
 #include <sys/statfs.h>
+#endif
+
 #include <inttypes.h>
 #include <glob.h>
 #include <fnmatch.h>
@@ -689,11 +698,20 @@ int storage_list_bins_files_to_rebuild(storage_t * st, sid_t sid,
             sprintf(pattern, "*%.3u*", sid);
 
             // Globbing function
+#ifdef __linux__
             if (glob(pattern, GLOB_ONLYDIR, 0, &glob_results) == 0) {
+#else
+            if (glob(pattern, 0, 0, &glob_results) == 0) {
+#endif
+
 
                 // For all the directories matching pattern
                 for (p = glob_results.gl_pathv, cnt = glob_results.gl_pathc;
                         cnt; p++, cnt--) {
+									if (stat(*p, &sb))
+										continue;
+									if (!S_ISDIR(sb.st_mode))
+										continue;
 
                     // Get the dist_set for this directory
                     switch (layout_it) {

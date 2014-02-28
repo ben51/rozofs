@@ -161,6 +161,7 @@ add_executable(test_export
     ${CMAKE_SOURCE_DIR}/rozofs/rozofs.h
     ${CMAKE_SOURCE_DIR}/rozofs/rozofs_srv.h
     ${CMAKE_SOURCE_DIR}/rozofs/rozofs_srv.c
+    ${CMAKE_SOURCE_DIR}/rozofs/core/rozofs_xdr_freebsd.c
     ${CMAKE_SOURCE_DIR}/rozofs/common/xmalloc.h
     ${CMAKE_SOURCE_DIR}/rozofs/common/xmalloc.c
     ${CMAKE_SOURCE_DIR}/rozofs/common/htable.h

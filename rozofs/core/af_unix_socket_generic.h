@@ -949,4 +949,12 @@ static inline void af_inet_attach_application_availability_callback(af_unix_ctx_
  @retval < 0 error on at least one socket creation
 */
 int af_unix_socket_set_datagram_socket_len(int len);
+#ifdef __FreeBSD__
+#define tcpi_probes __tcpi_probes
+#define tcpi_unacked __tcpi_unacked
+#define tcpi_lost __tcpi_lost
+#define tcpi_retrans __tcpi_retrans
+#define tcpi_last_data_sent __tcpi_last_data_sent
+#endif
+
 #endif

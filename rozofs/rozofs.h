@@ -86,6 +86,20 @@
 #define P_COUNT     0
 #define P_ELAPSE    1
 #define P_BYTES     2
+/* Fix getter/setter for extended attributes on FreeBSD */
+#ifdef __FreeBSD__
+#include <sys/types.h>
+#include <sys/extattr.h>
+#define fsetxattr(a, b, c, d, e) extattr_set_fd(a, 0, b, c, d)
+#define fgetxattr(a, b, c, d) extattr_get_fd(a, 0, b, c, d)
+#define flistxattr(a, b, c) extattr_list_fd(a, 0, b, c)
+#define fremovexattr(a, b) extattr_delete_fd(a, 0, b)
+#endif
+
+#ifndef ENOKEY
+#define ENOKEY    126
+#endif
+
 
 #define MICROLONG(time) ((unsigned long long)time.tv_sec * 1000000 + time.tv_usec)
 

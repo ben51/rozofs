@@ -32,8 +32,13 @@
 #define ROZOFS_ST_BINS_FILE_HDR_SIZE 8192
 
 /** Default open flags to use for open bins files */
+#ifdef __FreeBSD__
+#define ROZOFS_ST_BINS_FILE_FLAG O_RDWR | O_CREAT
+#define ROZOFS_ST_BINS_FILE_FLAG_NO_CREATE O_RDWR
+#else
 #define ROZOFS_ST_BINS_FILE_FLAG O_RDWR | O_CREAT | O_NOATIME
 #define ROZOFS_ST_BINS_FILE_FLAG_NO_CREATE O_RDWR | O_NOATIME
+#endif
 
 /** Default mode to use for open bins files */
 #define ROZOFS_ST_BINS_FILE_MODE S_IFREG | S_IRUSR | S_IWUSR

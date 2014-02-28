@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <rpc/rpc.h>
 #include <rpc/pmap_clnt.h>
 #include <string.h>
 #include <memory.h>

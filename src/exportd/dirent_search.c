@@ -18,7 +18,9 @@
  <http://www.gnu.org/licenses/>.
  */
 
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
 
 #include <string.h>
 #include <stdio.h>
