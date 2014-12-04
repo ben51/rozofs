@@ -17,7 +17,9 @@
  */
 
 /* need for crypt */
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
 #define FUSE_USE_VERSION 26
 #include <string.h>
 #include <stdlib.h>
@@ -139,7 +141,7 @@ int  rozofs_storcli_transform_get_read_len_in_bytes(rozofs_storcli_inverse_block
 /**
 *
 */
-inline int rozofs_storcli_transform_inverse_check_timestamp_tb(rozofs_storcli_projection_ctx_t *prj_ctx_p,  
+int rozofs_storcli_transform_inverse_check_timestamp_tb(rozofs_storcli_projection_ctx_t *prj_ctx_p,  
                                        uint8_t layout,
                                        uint32_t block_idx, 
                                        uint8_t *prj_idx_tb_p,
@@ -256,7 +258,7 @@ inline int rozofs_storcli_transform_inverse_check_timestamp_tb(rozofs_storcli_pr
 /**
 *
 */
-inline int rozofs_storcli_transform_inverse_check(rozofs_storcli_projection_ctx_t *prj_ctx_p,  
+int rozofs_storcli_transform_inverse_check(rozofs_storcli_projection_ctx_t *prj_ctx_p,  
                                        uint8_t layout,
                                        uint32_t block_idx, 
                                        uint8_t *prj_idx_tb_p,

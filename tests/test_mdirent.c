@@ -1,4 +1,6 @@
+#ifdef __linux__
 #define _XOPEN_SOURCE 700
+#endif
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/stat.h>

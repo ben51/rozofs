@@ -25,7 +25,9 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#ifdef __linux__
 #include <sys/statfs.h>
+#endif
 
 #include "rpc_throughput.h"
 

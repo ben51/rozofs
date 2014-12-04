@@ -759,6 +759,7 @@ int af_inet_sock_client_create(char *nickname,
     }
     
     
+#ifdef __linux__
     /*
     ** Set a max SYN retry number to 2
     */
@@ -768,6 +769,7 @@ int af_inet_sock_client_create(char *nickname,
     {
        severe("setsockopt TCP_SYNCNT %d %s",sync_max_retry, strerror(errno));
     }  
+#endif
     
     /*
     ** do the connect

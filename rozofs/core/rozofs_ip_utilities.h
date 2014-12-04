@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <netdb.h>
 #include <rozofs/common/log.h>
+#include <netinet/in.h>
 
 
 #ifdef __cplusplus

@@ -17,7 +17,9 @@
  */
 
 /* need for crypt */
+#ifdef __linux__
 #define _XOPEN_SOURCE 500
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>

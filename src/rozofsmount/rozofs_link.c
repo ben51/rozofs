@@ -17,6 +17,7 @@
  */
 
 #include <rozofs/rpc/eproto.h>
+#include <sys/param.h>
 
 #include "rozofs_fuse_api.h"
 

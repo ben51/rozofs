@@ -31,6 +31,9 @@ typedef struct _rozofs_xattr_flt_t
 } rozofs_xattr_flt_t;
 
 #define ROZOFS_XATTR_FILTR_MAX 64
+#ifndef ENODATA
+#define ENODATA 61
+#endif
 
 extern int rozofs_xattr_flt_count; /**< current number of filters */
 extern int rozofs_xattr_flt_enable; /**< assert to 1 to enbale the filter */

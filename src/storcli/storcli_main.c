@@ -33,6 +33,7 @@
 #include <rpc/pmap_clnt.h>
 #include <getopt.h>
 #include <time.h>
+#include <sys/dirent.h>
 
 #include <rozofs/rozofs_srv.h>
 #include <rozofs/rozofs_timer_conf.h>
@@ -61,6 +62,10 @@
 #include "rozofs_storcli_mojette_thread_intf.h"
 
 #define STORCLI_PID_FILE "storcli.pid"
+
+#ifndef NAME_MAX
+#define NAME_MAX MAXNAMLEN
+#endif
 
 int rozofs_storcli_non_blocking_init(uint16_t dbg_port, uint16_t rozofsmount_instance);
 

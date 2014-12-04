@@ -20,7 +20,13 @@
 #include <inttypes.h>
 #include <assert.h>
 #include <semaphore.h>
+#ifdef __linux__
 #include <mntent.h>
+#else
+#include <sys/param.h>
+#include <sys/ucred.h>
+#include <sys/mount.h>
+#endif
 #include <sys/resource.h>
 
 #include <rozofs/rozofs_debug_ports.h>
@@ -372,8 +378,10 @@ static SVCXPRT *rozofsmount_create_rpc_service(int port) {
 
     /* Set socket options */
     setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (char *) &one, sizeof (int));
-    setsockopt(sock, SOL_TCP, TCP_DEFER_ACCEPT, (char *) &one, sizeof (int));
-    setsockopt(sock, SOL_TCP, TCP_NODELAY, (char *) &one, sizeof (int));
+#ifdef __linux__
+    setsockopt(sock, IPPROTO_TCP, TCP_DEFER_ACCEPT, (char *) &one, sizeof (int));
+#endif
+    setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, (char *) &one, sizeof (int));
 
     /* Bind the socket */
     if (bind(sock, (struct sockaddr *) &sin, sizeof (struct sockaddr)) < 0) {
@@ -1905,8 +1913,13 @@ void rozofs_allocate_flush_buf(int size_kB);
  */
 int rozofs_mountpoint_check(const char * mntpoint) {
 
+#ifdef __linux
     struct mntent* mnt_entry = NULL;
     FILE* mnt_file_stream = NULL;
+#else
+    int nb_entries;
+    struct statfs *mnt_entries;
+#endif
     char mountpoint_path[PATH_MAX];
 
     if (!realpath(mntpoint, mountpoint_path)) {
@@ -1914,6 +1927,7 @@ int rozofs_mountpoint_check(const char * mntpoint) {
         return -1;
     }
 
+#ifdef __linux__
     mnt_file_stream = setmntent(MOUNTED_FS_FILE_CHECK, "r");
     if (mnt_file_stream == NULL) {
         fprintf(stderr, "setmntent failed for file "MOUNTED_FS_FILE_CHECK":"
@@ -1935,6 +1949,19 @@ int rozofs_mountpoint_check(const char * mntpoint) {
     }
 
     endmntent(mnt_file_stream);
+#else
+    nb_entries = getmntinfo(&mnt_entries, 0);
+    for (nb_entries = 0; nb_entries < nb_entries; nb_entries++) {
+        if ((strcmp(mountpoint_path, mnt_entries[nb_entries].f_mntonname) == 0)
+                && (strcmp(FSNAME, mnt_entries[nb_entries].f_fstypename) == 0)) {
+            fprintf(stderr,
+                    "according to '"MOUNTED_FS_FILE_CHECK"', %s is already a"
+                    " active mountpoint for a Rozo file system\n",
+                    mountpoint_path);
+            return -1;
+        }
+    }
+#endif
 
     return 0;
 }

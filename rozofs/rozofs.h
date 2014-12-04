@@ -24,6 +24,8 @@
 
 #include <config.h>
 
+#define __BSD_VISIBLE 1
+
 /**
 * Ports definition of RozoFS
 */
@@ -88,7 +90,6 @@
 #define P_BYTES     2
 /* Fix getter/setter for extended attributes on FreeBSD */
 #ifdef __FreeBSD__
-#include <sys/types.h>
 #include <sys/extattr.h>
 #define fsetxattr(a, b, c, d, e) extattr_set_fd(a, 0, b, c, d)
 #define fgetxattr(a, b, c, d) extattr_get_fd(a, 0, b, c, d)
@@ -185,11 +186,10 @@ static inline void mstor_get_slice_and_subslice(fid_t fid, uint32_t *slice, uint
     *subslice = hash & ((1 << MAX_SUBSLICE_BIT) - 1);
 }
 
-#ifdef __FreeBSD__
+#ifndef __linux
 #include <rpc/rpc.h>
-extern bool_t	xdr_int8_t(XDR *, int8_t *);
-extern bool_t	xdr_u_int8_t(XDR *, u_int8_t *);
-extern bool_t	xdr_uint8_t(XDR *, u_int8_t *);
+extern bool_t  xdr_int8_t(XDR *, int8_t *);
+extern bool_t  xdr_u_int8_t(XDR *, u_int8_t *);
+extern bool_t  xdr_uint8_t(XDR *, u_int8_t *);
 #endif
-
 #endif

@@ -876,6 +876,7 @@ int af_unix_sock_client_reconnect(uint32_t af_unix_ctx_id)
    else
    {
      sock_p->socketRef = af_inet_sock_stream_client_create_internal(sock_p,sock_p->so_sendbufsize);
+#ifdef __linux__
      /*
      ** Set a max SYN retry number to 2
      */
@@ -885,6 +886,7 @@ int af_unix_sock_client_reconnect(uint32_t af_unix_ctx_id)
      {
 	   severe("setsockopt TCP_SYNCNT %d %s",sync_max_retry, strerror(errno));
      }     
+#endif
    }
    if (sock_p->socketRef == -1)
    {

@@ -171,7 +171,7 @@ __inline__ int ruc_sockCtrl_build_sock_table(uint64_t *fdset_p,int *socket_tab_p
    
    curr_socket_id = 0;
 
-   for (i = 0; i < (__FD_SETSIZE / __NFDBITS); i++)
+   for (i = 0; i < (FD_SETSIZE / NFDBITS); i++)
    {
      val64 = fdset_p[i];
      curr_socket_id = i*(sizeof(uint64_t)*8);
@@ -279,7 +279,7 @@ void ruc_sockCtrl_debug_show(uint32_t tcpRef, void * bufRef) {
   ruc_applicative_poller_cycles = 0;
   ruc_applicative_poller_count  = 0;	
 
-  pChar += sprintf(pChar,"rucRdFdSet %p (%lu) __FD_SETSIZE :%u __NFDBITS :%u\n",&rucRdFdSet,(long unsigned int)sizeof(rucRdFdSet),__FD_SETSIZE,__NFDBITS);
+  pChar += sprintf(pChar,"rucRdFdSet %p (%lu) FD_SETSIZE :%u NFDBITS :%u\n",&rucRdFdSet,(long unsigned int)sizeof(rucRdFdSet),FD_SETSIZE,NFDBITS);
   
   
   pChar += sprintf(pChar,"select max cpu time : %u us\n",ruc_sockCtrl_looptimeMax);

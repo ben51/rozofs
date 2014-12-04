@@ -793,6 +793,9 @@ int af_unix_socket_family_create (char *basename_p, int base_instance,int nb_ins
 */
 #define QLEN_FILE "/proc/sys/net/unix/max_dgram_qlen"
 int af_unix_socket_set_datagram_socket_len(int len) {
+#ifndef __linux__
+    return 0;
+#endif
   char new_value[32];
   int fd;
   int ret = 0;

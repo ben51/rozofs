@@ -19,7 +19,11 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
+#ifdef __linux__
 #include <linux/if.h>
+#else
+#include <net/if.h>
+#endif
 #include <unistd.h>
 #include <ctype.h>
 #include <errno.h>
